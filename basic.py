@@ -55,8 +55,8 @@ MAX_RETRY = 3
 def timeit(func):
 
     def wrapper(*args, **kwargs):
-        return func(*args, **kwargs)
-        # return _wrapper(*args, **kwargs)
+        # return func(*args, **kwargs)
+        return _wrapper(*args, **kwargs)
 
     def _wrapper(*args, **kwargs):
         ts = time.time()
@@ -105,7 +105,7 @@ def load_object(fname):
 
 
 # @profile
-@timeit
+# @timeit
 def login(url, auth=None, cookies=None):
     s = requests.Session()
     s.headers.update(HDRS)
@@ -118,7 +118,7 @@ def login(url, auth=None, cookies=None):
 
 
 # @profile
-@timeit
+# @timeit
 def create_session(url, auth=None, cookie_fname=None):
     # login
     cookiejar = None
@@ -133,7 +133,7 @@ def create_session(url, auth=None, cookie_fname=None):
 
 
 # @profile
-@timeit
+# @timeit
 def get_page_content(url, s=None, retry=False):
     """."""
     content = None
@@ -169,7 +169,7 @@ def get_page_content(url, s=None, retry=False):
             content = content.decode(encoding)
             content = content.encode(UTF8_ENCODING)
     except IOError:
-        print("Error occurred during request of ({url}) "\
+        print("Error occurred during request of ({url}) "
               .format(url=url))
 
     return content, r.status_code
@@ -178,7 +178,7 @@ def get_page_content(url, s=None, retry=False):
 def search_regex(regex, string):
     results = None
     if string:
-        results = re.findall(regex, string, re.U|re.S)
+        results = re.findall(regex, string, re.U | re.S)
     return results
 
 
@@ -220,7 +220,7 @@ def get_uuid():
 
 
 def get_timestamp():
-    tz=pytz.timezone(TIMEZONE)
+    tz = pytz.timezone(TIMEZONE)
     now = datetime.datetime.now(tz=tz)
     return now.isoformat()
 
@@ -239,7 +239,8 @@ def unicodify(adict, encoding='utf-8'):
 def debug_me():
     import pdb
     pdb.set_trace()
-    me = 'gpanda'
+    me = "gpanda"
+    print(me)
 
 # =============================================================================
 

@@ -179,7 +179,7 @@ class INFZMPaperFeeder:
 
     #@profile
     @staticmethod
-    @timeit
+    # @timeit
     def digest1(raw):
 
         rc_1 = (None, None, None, None, None)
@@ -246,7 +246,7 @@ class INFZMPaperFeeder:
         return str(cooked), images
 
     # @profile
-    @timeit
+    # @timeit
     def crawl_articles(self):
         """Central controller of articles crawling.
 
@@ -269,8 +269,8 @@ class INFZMPaperFeeder:
         }
 
         """
-        #@profile
-        @timeit
+        # @profile
+        # @timeit
         def work(__in, __out):
             for k, v in __in.iteritems():
                 while not v.empty():
@@ -320,7 +320,7 @@ class INFZMPaperFeeder:
                 od[url]['images'] = images
 
     # @profile
-    @timeit
+    # @timeit
     def crawl_mainpage(self):
         raw, rc = get_page_content(self.url, self.sess)
         if rc >= 200 and rc < 300:
@@ -333,7 +333,7 @@ class INFZMPaperFeeder:
             return 1
 
     # @profile
-    @timeit
+    # @timeit
     def crawl(self):
         rc = self.crawl_mainpage()
         if rc == 0:
@@ -347,8 +347,8 @@ class INFZMPaperFeeder:
         print(self.cov_img)
         print("</br>")
         # paper name, url, vol_iss, date
-        print(u"<a href=\"{0}\">南都周末电子报 - {1}</a></br>"\
-                .format(self.url, self.vol_iss))
+        print(u"<a href=\"{0}\">南都周末电子报 - {1}</a></br>"
+              .format(self.url, self.vol_iss))
         print(u"出版日期: {0}</br>".format(self.date))
         # top news
         print(self.top_news + u"</br>")
@@ -378,9 +378,9 @@ class INFZMPaperFeeder:
         cov_img_url = re.findall(HTML_IMG_URL_REGEX, self.cov_img)[0]
         download_image(cov_img_url, COVER_IMAGE_NAME)
         words = self.cov_img + u"</br>" + u"\n" \
-                + u"<a href=\"{0}\">南都周末电子报 - {1}</a></br>\n"\
-                 .format(self.url, self.vol_iss) + u"\n" \
-                + u"出版日期: {0}</br>".format(self.date) + u"\n"
+            + u"<a href=\"{0}\">南都周末电子报 - {1}</a></br>\n"\
+            .format(self.url, self.vol_iss) + u"\n" \
+            + u"出版日期: {0}</br>".format(self.date) + u"\n"
         self.write_page(words, COVER_PAGE)
 
     def write_topnews_s(self):

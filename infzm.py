@@ -4,13 +4,14 @@ from __future__ import print_function
 import os
 import sys
 import json
-from basic import create_session
+from basic import create_session, timeit
 from driver import LOGIN_URL, AUTH2, PREFIX_00, COOKIEJAR_FNAME,\
     INFZMPaperFeeder
 
 __author__ = 'gpanda'
 
-PY_ROOT=os.path.abspath(__file__)
+
+PY_ROOT = os.path.abspath(__file__)
 sys.path.append(PY_ROOT)
 
 
@@ -21,6 +22,7 @@ def load_urls(fname):
     return urls
 
 
+@timeit
 def fetch_news():
     sess, rc = create_session(LOGIN_URL, AUTH2, COOKIEJAR_FNAME)
     if not 200 <= rc <= 299:
@@ -46,7 +48,7 @@ def fetch_news():
 
 
 def main():
-    print("For my lovely dad!")
+    print("For my lovely dad!\n")
     fetch_news()
 
 
