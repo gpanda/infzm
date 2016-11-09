@@ -179,7 +179,7 @@ class INFZMPaperFeeder:
 
     #@profile
     @staticmethod
-    @timeit
+    # @timeit
     def digest1(raw):
 
         rc_1 = (None, None, None, None, None)
@@ -246,7 +246,7 @@ class INFZMPaperFeeder:
         return str(cooked), images
 
     # @profile
-    @timeit
+    # @timeit
     def crawl_articles(self):
         """Central controller of articles crawling.
 
@@ -269,8 +269,8 @@ class INFZMPaperFeeder:
         }
 
         """
-        #@profile
-        @timeit
+        # @profile
+        # @timeit
         def work(__in, __out):
             for k, v in __in.iteritems():
                 while not v.empty():
@@ -320,7 +320,7 @@ class INFZMPaperFeeder:
                 od[url]['images'] = images
 
     # @profile
-    @timeit
+    # @timeit
     def crawl_mainpage(self):
         raw, rc = get_page_content(self.url, self.sess)
         if rc >= 200 and rc < 300:
@@ -333,7 +333,7 @@ class INFZMPaperFeeder:
             return 1
 
     # @profile
-    @timeit
+    # @timeit
     def crawl(self):
         rc = self.crawl_mainpage()
         if rc == 0:

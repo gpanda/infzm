@@ -55,8 +55,8 @@ MAX_RETRY = 3
 def timeit(func):
 
     def wrapper(*args, **kwargs):
-        return func(*args, **kwargs)
-        # return _wrapper(*args, **kwargs)
+        # return func(*args, **kwargs)
+        return _wrapper(*args, **kwargs)
 
     def _wrapper(*args, **kwargs):
         ts = time.time()
@@ -105,7 +105,7 @@ def load_object(fname):
 
 
 # @profile
-@timeit
+# @timeit
 def login(url, auth=None, cookies=None):
     s = requests.Session()
     s.headers.update(HDRS)
@@ -118,7 +118,7 @@ def login(url, auth=None, cookies=None):
 
 
 # @profile
-@timeit
+# @timeit
 def create_session(url, auth=None, cookie_fname=None):
     # login
     cookiejar = None
@@ -133,7 +133,7 @@ def create_session(url, auth=None, cookie_fname=None):
 
 
 # @profile
-@timeit
+# @timeit
 def get_page_content(url, s=None, retry=False):
     """."""
     content = None

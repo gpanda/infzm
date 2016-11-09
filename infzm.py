@@ -4,7 +4,7 @@ from __future__ import print_function
 import os
 import sys
 import json
-from basic import create_session
+from basic import create_session, timeit
 from driver import LOGIN_URL, AUTH2, PREFIX_00, COOKIEJAR_FNAME,\
     INFZMPaperFeeder
 
@@ -20,7 +20,7 @@ def load_urls(fname):
     print(type(urls))
     return urls
 
-
+@timeit
 def fetch_news():
     sess, rc = create_session(LOGIN_URL, AUTH2, COOKIEJAR_FNAME)
     if not 200 <= rc <= 299:
