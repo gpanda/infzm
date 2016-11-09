@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title>{{ title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre">
+<div class="calibre_navbar">| <a href="../{{ _next.path + '/' + _next.index.page.path if _next }}">下一章</a> | <a href="../index.html">主菜单</a> | <a href="../{{ _prev.path + '/' + _prev.index.page.path if _prev }}">上一章</a> | <hr class="calibre5"/>
+</div>
+<div class="calibre_rescale_">
+<h2 class="calibre_feed_title">{{ title }}</h2>
+<ul class="calibre_feed_list">
+{% for article in articles.itervalues() -%}
+<li id="{{ article.page.id }}" class="calibre_rescale_1">
+<a href="{{ article.path }}/{{ article.page.path }}" class="article">{{ article.title }}</a><span class="article_date">{{ article.date }}</span>
+</li>
+{% endfor -%}
+</ul>
+<div class="calibre_navbar">
+<hr class="calibre5"/>| <a href="../{{ _next.path + '/' + _next.index.page.path if _next }}">下一章</a> | <a href="../index.html">主菜单</a> | <a href="../{{ _prev.path + '/' + _prev.index.page.path if _prev }}">上一章</a> |</div>
+</div>
+
+
+</body></html>

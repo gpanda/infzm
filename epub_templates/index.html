@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <title>{{ title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre">
+    <div class="calibre_rescale_">
+      <p class="calibre1">
+        <img src="{{ master_head_image.path }}" alt="masthead" class="calibre2"/>
+      </p>
+      <p class="calibre3"> [{{ date }}]</p>
+      <ul class="calibre_feed_list">
+        {% for chapter in chapters.itervalues() -%}
+        <li id="{{ chapter.index.page.id }}" class="calibre4">
+          <a href="{{ chapter.path }}/{{ chapter.index.page.path }}" class="feed">{{ chapter.title }}</a>
+        </li>
+        {% endfor -%}
+      </ul>
+    </div>
+  </body>
+</html>

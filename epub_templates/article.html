@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en" dir="ltr">
+  <head>
+    <title>{{ title }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link href="../../stylesheet.css" rel="stylesheet" type="text/css"/>
+<link href="../../page_styles.css" rel="stylesheet" type="text/css"/>
+</head>
+  <body class="calibre"><div class="calibre_navbar">| <a href="../{{ _next.path + '/' + _next.page.path if _next }}">下一项</a> | <a href="../{{ _parent.index.page.path }}#{{ page.id }}">章节菜单</a> | <a href="../../{{ _parent._parent.index.page.path }}#{{ _parent.index.page.id }}">主菜单</a> | <a href="../{{ _prev.path + '/' + _prev.page.path if _prev }}">上一项</a> | <hr class="calibre5"/>
+</div><div itemscope="itemscope" itemtype="http://schema.org/Article" class="calibre6">
+<!--<hgroup>
+<h1 itemprop="headline" class="headline">{{ title }}</h1>
+</hgroup>
+-->
+<!--
+<div class="calibre6">
+    <time itemprop="dateCreated" datetime="{{ created }}"> {{ created }} </time>| <a href="{{ url }}">参见原文</a>
+</div>
+-->
+<div class="calibre6" itemprop="articleBody">
+{{ article }}
+</div>
+</div><div class="calibre_navbar">
+<hr class="calibre5"/>
+<p class="calibre9">这篇文章由<strong class="calibre10">gpanda</strong>下载自<a rel="calibre-downloaded-from" href="{{ url }}">{{ url }}</a></p>
+<br class="calibre6"/><br class="calibre6"/> | <a href="../{{ _parent.index.page.path }}#{{ page.id }}">章节菜单</a> | <a href="../../{{ _parent._parent.index.page.path }}#{{ _parent.index.page.id }}">主菜单</a> | </div></body>
+</html>

@@ -1,0 +1,7 @@
+tags
+*.pyc
+tmp/
+.idea/
+downloads/**
+tests/**
+!tests/*.py

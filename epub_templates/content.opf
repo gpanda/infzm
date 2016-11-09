@@ -1,0 +1,63 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+  <metadata xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <dc:title>{{ title }}-[{{ date }}]</dc:title>
+    <dc:creator opf:role="aut" opf:file-as="Ren, Gpanda">{{ compiler }}</dc:creator>
+    <dc:description>{{ desc_short }}
+{% for chapter in chapters.itervalues() -%}
+{% for title in chapter.articles.iterkeys() %}
+{{ title }}
+{% endfor -%}
+{% endfor -%}
+</dc:description>
+    <dc:date>{{ date }}</dc:date>
+    <dc:identifier id="uuid_id" opf:scheme="uuid">{{ uuid }}</dc:identifier>
+    <dc:publisher>{{ publisher }}</dc:publisher>
+    <dc:contributor opf:role="bkp">{{ contributor }}</dc:contributor>
+    <dc:subject>{{ subject1 }}</dc:subject>
+    <dc:subject>{{ subject2 }}</dc:subject>
+    <dc:language>{{ language }}</dc:language>
+    <dc:identifier opf:scheme="gpanda">94516fc6-b41a-5a5a-9afb-e9c96a6f2b45</dc:identifier>
+    <meta name="cover" content="cover"/>
+    <meta name="calibre:timestamp" content="{{ timestamp }}"/>
+    <meta name="calibre:publication_type" content="periodical:unknown:{{ title }}"/>
+    <meta name="calibre:title_sort" content="{{ title }} [{{ date }}]"/>
+    <meta name="calibre:author_link_map" content="{&quot;{{ author }}&quot;: &quot;&quot;}"/>
+  </metadata>
+  <manifest>
+    <item href="page_styles.css" id="page_css" media-type="text/css"/>
+    <item href="stylesheet.css" id="css" media-type="text/css"/>
+    <item href="{{ cover.path }}" id="cover" media-type="image/jpeg"/>
+    <item href="{{ master_head_image.path }}" id="masthead-image" media-type="image/png"/>
+    <item href="toc.ncx" id="ncx" media-type="application/x-dtbncx+xml"/>
+    <item href="titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml"/>
+    <item href="index.html" id="id0" media-type="application/xhtml+xml"/>
+    {% for chapter in chapters.itervalues() -%}
+    <item href="{{ chapter.path }}/{{ chapter.index.page.path }}" id="{{ chapter.index.page.id }}" media-type="{{ chapter.index.page.media_type }}"/>
+    {% for article in chapter.articles.itervalues() -%}
+    <item href="{{ chapter.path }}/{{ article.path }}/{{ article.page.path }}" id="{{ article.page.id }}" media-type="{{ article.page.media_type }}"/>
+    {% endfor -%}
+    {% endfor -%}
+    {% for chapter in chapters.itervalues() -%}
+    {% for article in chapter.articles.itervalues() if article.images -%}
+    {% for image in article.images -%}
+    <item href="{{ chapter.path }}/{{ article.path }}/{{ image.path }}" id="{{ image.id }}" media-type="{{ image.media_type }}"/>
+    {% endfor -%}
+    {% endfor -%}
+    {% endfor -%}
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="titlepage"/>
+    <itemref idref="id0"/>
+    {% for chapter in chapters.itervalues() -%}
+    <itemref idref="{{ chapter.index.page.id }}"/>
+    {% for article in chapter.articles.itervalues() -%}
+    <itemref idref="{{ article.page.id }}"/>
+    {% endfor -%}
+    {% endfor -%}
+  </spine>
+  <guide>
+    <reference href="{{ master_head_image.path }}" title="Masthead Image" type="other.masthead"/>
+    <reference href="titlepage.xhtml" title="Cover" type="cover"/>
+  </guide>
+</package>

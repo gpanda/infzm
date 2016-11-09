@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="eng">
+  <head>
+    <meta content="{{ uuid }}" name="dtb:uid"/>
+    <meta content="3" name="dtb:depth"/>
+    <meta content="calibre (2.65.1)" name="dtb:generator"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>{{ title }} [{{ date }}]</text>
+  </docTitle>
+  <navMap>
+    {#
+    <!-- Sample
+    <navPoint class="chapter" id="num_9" playOrder="9">
+      <navLabel>
+        <text>经济</text>
+      </navLabel>
+      <content src="c2/contents.html"/>
+        <navPoint class="chapter" id="num_10" playOrder="10">
+          <navLabel>
+            <text>创投市场将迎来“国家队”</text>
+          </navLabel>
+          <content src="c2/a0/article.html"/>
+        </navPoint>
+    </navPoint>
+    -->
+    #}
+    {% for chapter in chapters.itervalues() -%}
+    <navPoint class="chapter" id="num_{{ chapter.index.page.order }}" playOrder="{{ chapter.index.page.order }}">
+      <navLabel>
+        <text>{{ chapter.title }}</text>
+      </navLabel>
+      <content src="{{ chapter.path }}/{{ chapter.index.page.path }}"/>
+      {% for article in chapter.articles.itervalues() -%}
+      <navPoint class="chapter" id="num_{{ article.page.order }}" playOrder="{{ article.page.order }}">
+        <navLabel>
+          <text>{{ article.title }}</text>
+        </navLabel>
+        <content src="{{ chapter.path }}/{{ article.path }}/{{ article.page.path }}"/>
+      </navPoint>
+      {% endfor -%}
+    </navPoint>
+    {% endfor -%}
+  </navMap>
+</ncx>
