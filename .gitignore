@@ -5,5 +5,7 @@ tmp/
 downloads/**
 tests/**
 !tests/*.py
+rc
 
 .DS_Store
+
