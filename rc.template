@@ -1,0 +1,5 @@
+# calibre path
+export PATH="/Applications/calibre.app/Contents/MacOS:$PATH"
+# your kindle reader's email address, separated by comma(,)
+export RECEIVERS=foo@kindle.cn
+export MESSAGE="Hello, your 南方周末 news\!"

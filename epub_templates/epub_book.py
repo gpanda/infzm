@@ -38,6 +38,7 @@ class EPubBook(object):
                               + ".epub"
         shutil.make_archive(self.epub_file_name, 'zip', self.epub_root)
         shutil.move(self.epub_file_name + ".zip", self.epub_file_name)
+        shutil.rmtree(self.epub_root)
 
     def cook_init(self):
         None
@@ -139,7 +140,7 @@ class Article(object):
         for img in self.images:
             full_path_i = full_path_a + os.sep + img.path
             format = download_image(img.url, full_path_i)
-            if format != 'jpeg':
+            if format and format != 'jpeg':
                 path, ext = os.path.splitext(img.path)
                 img.path = path + '.' + format
                 img.media_type = "image/" + format

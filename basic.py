@@ -69,21 +69,36 @@ def timeit(func):
         if kwargs:
             _args += json.dumps(str(kwargs))
         _thread = threading.current_thread()
-        print("\n======================== > TIMEIT > =========================")
-        print((
-                 "Duration: [{time}]\n"
-               + "  Thread: [{thread}]\n"
-               + "    Func: [{func}]\n"
-               + "    Args: [{args}]\n")\
-              .format(time=td, thread=_thread.name,
-                      func=func.func_name, args=_args
-                      )
-             )
-        print("======================== < TIMEIT < =========================\n")
+        out = "\n======================== > TIMEIT > ========================="
+        out += (
+            "\nDuration: [{time}]\n" +
+            "  Thread: [{thread}]\n" +
+            "    Func: [{func}]\n" +
+            "    Args: [{args}]\n")\
+            .format(time=td, thread=_thread.name,
+                    func=func.func_name, args=_args)
+        out += "======================== < TIMEIT < =========================\n"
+        print(out)
         sys.stdout.flush()
         return rc
 
     return wrapper
+
+
+def do_together(job, worker_num=1, *args, **kwargs):
+    workers = {}
+    for i in range(worker_num):
+        workers[i] = threading.Thread(
+            target=job,
+            name="Worker-" + str(i),
+            args=tuple(args),
+            kwargs=dict(kwargs)
+        )
+        workers[i].start()
+    for worker in workers.values():
+        worker.join()
+
+    print("\nAll jobs were done by {} workers.\n".format(worker_num))
 
 
 def save_cookies(cookiejar, fname):
@@ -208,10 +223,14 @@ def download_image(url, fname):
     if dirname != '' and not os.path.exists(dirname):
         os.makedirs(dirname)
     r = requests.get(url)
-    i = Image.open(StringIO.StringIO(r.content))
-    pathname, ext = os.path.splitext(fname)
-    newfname = pathname + '.' + i.format.lower()
-    i.save(newfname, i.format)
+    try:
+        i = Image.open(StringIO.StringIO(r.content))
+        pathname, ext = os.path.splitext(fname)
+        newfname = pathname + '.' + i.format.lower()
+        i.save(newfname, i.format)
+    except IOError as ioe:
+        print("Image downloading error:[\n" + ioe + "\n]\n")
+        return None
     return i.format.lower()
 
 
@@ -225,8 +244,9 @@ def get_timestamp():
     return now.isoformat()
 
 
-def unicodify(adict, encoding='utf-8'):
-        for k, v in adict.iteritems():
+def unicodify(container, encoding='utf-8'):
+    if isinstance(container, dict):
+        for k, v in container.iteritems():
             if isinstance(k, str):
                 k = unicode(k, encoding)
             if isinstance(v, dict):
@@ -234,6 +254,12 @@ def unicodify(adict, encoding='utf-8'):
             else:
                 if isinstance(v, str):
                     v = unicode(v, encoding)
+    elif isinstance(container, list):
+        for e in container:
+            if isinstance(e, list):
+                unicodify(e, encoding)
+            elif isinstance(e, str):
+                e = unicode(e, encoding)
 
 
 def debug_me():

@@ -281,7 +281,7 @@ class INFZMPaperFeeder:
                         article, images = INFZMPaperFeeder.digest2(raw)
                         __out[k].put([url, article, images])
                     else:
-                        print("Failed to get web page {0}.[Status code:{1}]"\
+                        print("Failed to get web page {0}.[Status code:{1}]"
                               .format(url, rc))
                         continue
 
