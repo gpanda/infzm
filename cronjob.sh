@@ -11,7 +11,7 @@
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Ren, Letian (), retaelppa@gmail.com
+#        AUTHOR: Ren, Letian (), gpanda.next@gmail.com
 #  ORGANIZATION:
 #       CREATED: 11/26/2016 14:27:28
 #      REVISION: ---
