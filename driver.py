@@ -124,10 +124,10 @@ PREFIX_01 = SCHEME + HOST + PATH_1
 # - Auth
 LOGIN_URL = 'http://passport.infzm.com/passport/login'
 AUTH2 = {
-    'loginname': 'retaelppa@gmail.com',
-    'password': 'rlt2880009'
+    'loginname': 'gpanda.next@gmail.com',
+    'password': 'r2'
 }
-AUTH = ('retaelppa@gmail.com', 'rlt2880009')
+AUTH = ('gpanda.next@gmail.com', 'r2')
 COOKIEJAR_FNAME = 'cookies'
 
 # BOOK
